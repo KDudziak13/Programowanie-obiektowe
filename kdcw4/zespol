@@ -1,0 +1,104 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp8
+{class Zespol { 
+
+    private int liczbaCzlonkow;
+
+    private string nazwa;
+
+    private KierownikZespolu kierownik;
+    public  List<CzlonekZespolu> czlonkowie;
+
+
+
+    public int LiczbaCzlonkow { get => liczbaCzlonkow; set => liczbaCzlonkow = value; }
+    public string Nazwa { get => nazwa; set => nazwa = value; }
+    internal KierownikZespolu Kierownik { get => kierownik; set => kierownik = value; }
+    internal List<CzlonekZespolu> Czlonkowie { get => czlonkowie; set => czlonkowie = value; }
+        //szybkie akcje
+
+
+        bool JestCzlonkiem(string p)
+        {
+            for (int i = 0; i < czlonkowie.Count; i++)
+            {
+                if (czlonkowie.ElementAt(i).Pesel.Equals(p)) return true;
+            }
+            return false;
+        }
+
+        bool JestCzlonkiem(CzlonekZespolu c)
+        {
+            foreach (CzlonekZespolu cz in Czlonkowie)
+            {
+                if (cz.Equals(c)) return true;
+            }
+            return false;
+        }
+
+        void UsunCzlonka(string p)
+        {
+            if (JestCzlonkiem(p))
+            {
+                czlonkowie.Remove(czlonkowie.Find(c => c.Pesel.Equals(p)));
+            }
+        }
+
+        List<CzlonekZespolu> WyszukajFunkcje(string f)
+        {
+            List<CzlonekZespolu> nowaLista = new List<CzlonekZespolu>();
+            nowaLista = czlonkowie.FindAll(c => c.Funkcja.Equals(f));
+            return nowaLista;
+        }
+
+        //kostruktory
+        public Zespol()
+    {
+        liczbaCzlonkow = 0;
+        nazwa = null;
+        Kierownik = null;
+        Czlonkowie = new List<CzlonekZespolu>();
+    }
+    //wywolujemy poprzedni zeby nie inicjalizowac znowu listy
+
+
+    public Zespol(string nazwa, KierownikZespolu kierownik) : this()
+    {
+        this.nazwa = nazwa;
+        this.kierownik = kierownik;
+
+    }
+
+
+    //metoda dodaj czlonkow
+    public void DodajCzlonka(CzlonekZespolu c)
+    {
+        liczbaCzlonkow++;
+        czlonkowie.Add(c);
+    }
+    //public void 
+
+    public override string ToString()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.AppendLine("Nazwa zespolu: " + nazwa);
+        sb.AppendLine("Kierownik: " + Kierownik.ToString());
+        sb.AppendLine("Czlonkowie zespolu: ");
+        foreach (CzlonekZespolu c in Czlonkowie)
+        {
+            sb.AppendLine(c.ToString());
+        }
+
+        return sb.ToString();
+
+    }
+
+
+
+}
+}

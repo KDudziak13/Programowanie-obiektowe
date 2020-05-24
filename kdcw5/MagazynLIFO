@@ -1,0 +1,92 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication11
+{
+    class MagazynLIFO :  IMagazynuje
+    {
+        public string nazwaMagazynu { get; set; }
+        public int Ilosc { get; set; }
+        public Stack<Paczka> Magazyn;
+
+        public MagazynLIFO()
+        {
+            nazwaMagazynu = null;
+            Ilosc = 0;
+            Magazyn = new Stack<Paczka>();
+
+        }
+        public MagazynLIFO(string nm)
+        {
+            this.nazwaMagazynu = nm;
+            Ilosc = 0;
+            Magazyn = new Stack<Paczka>();
+        }
+
+        //metody interfejsu
+
+        public void Umiesc(Paczka t)
+        {
+            this.Ilosc++;
+            this.Magazyn.Push(t);
+
+            
+        }
+
+        public Paczka Pobierz()
+        {
+            this.Ilosc--;
+            return this.Magazyn.Pop();
+           
+        }
+
+        public void Wyczysc()
+        {
+            this.Ilosc = 0;
+            this.Magazyn.Clear();
+            
+        }
+
+        public int PodajIlosc()
+        {
+            return Magazyn.Count();
+           
+        }
+
+        public Paczka PodajBiezacy()
+        {
+            return this.Magazyn.Peek();
+             
+        }
+        
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Magazyn " + nazwaMagazynu + " zawiera " + Ilosc + " paczke");
+            
+            foreach (Paczka t in Magazyn)
+            {
+                sb.Append(t + "\n");
+            }
+            return sb.ToString();
+        }
+        //kopia plytka
+
+        public object Clone()
+        {
+            return (MagazynLIFO)this.MemberwiseClone();
+        }
+        //kopia gleboka
+       public MagazynLIFO Kopiuj()
+        {
+            MagazynLIFO kopia = (MagazynLIFO)this.Clone();
+            kopia.Magazyn = new Stack<Paczka>(this.Magazyn);
+            return kopia;
+        }
+    }
+
+
+}

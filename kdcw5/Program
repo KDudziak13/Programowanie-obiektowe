@@ -1,0 +1,66 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication11
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //utworzenie 
+            Paczka pA = new Paczka("nadawcaA", 9);
+            Paczka pB = new Paczka("nadawcaB", 4);
+            Paczka pC = new Paczka("nadwcaC", 6);
+            Paczka pD = new Paczka("nadawcaD", 1);
+            //utworzenie magazynu lifo
+            MagazynLIFO magazynStos = new MagazynLIFO();
+            magazynStos.nazwaMagazynu = "Magazyn1";
+            //dodanie towarow do magazynu lifo
+            magazynStos.Umiesc(pA);
+            magazynStos.Umiesc(pB);
+            magazynStos.Umiesc(pC);
+            magazynStos.Umiesc(pD);
+            //test1 magazyn lifo
+            Console.WriteLine("Magazyn LIFO\n" + magazynStos);
+
+
+            //utworzenie magazynu fifo i dodanie elementow do listy
+            MagazynFIFO magazynKolejka = new MagazynFIFO();
+            magazynKolejka.nazwaMagazynu = "Magazyn2";
+            magazynKolejka.Umiesc(pA);
+            magazynKolejka.Umiesc(pB);
+            magazynKolejka.Umiesc(pC);
+            magazynKolejka.Umiesc(pD);
+            
+            Console.WriteLine("Magazyn FIFO\n" + magazynKolejka);
+
+            
+            Paczka pE = new Paczka("nadawcaE", 10);
+            MagazynLIFO magazynStosKopia = magazynStos.Kopiuj();
+            magazynStosKopia.Pobierz();
+            magazynStosKopia.Umiesc(pE);
+
+            Console.WriteLine("Kopia magazynu LIFO\n" + magazynStosKopia);
+
+            
+
+             MagazynList magazynLista = new MagazynList();
+             magazynLista.nazwaMagazynu = "Magazyn3";
+             magazynLista.UmiescNaPoczatku(pA);
+             magazynLista.UmiescNaPoczatku(pC);
+             magazynLista.UmiescNaPoczatku(pD);
+             magazynLista.UmiescNaPoczatku(pE);
+
+             magazynLista.Sortuj();
+             Console.WriteLine("Sortowanie- rozmiar paczek:\n" + magazynLista);
+
+            
+
+
+            Console.ReadKey();
+        }
+    }
+}

@@ -1,0 +1,37 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp8
+{
+    public enum Plcie { K = 0, M = 1 }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            
+            Osoba o1 = new Osoba("Beata", "Nowak", "1992-10-22", "92102201347",Plcie.K);
+            Osoba o2 = new Osoba("Jan", "Janowski", "1993-03-15", "92031507772", Plcie.M);
+            Console.WriteLine(o1);
+            Console.WriteLine(o2);
+           
+            CzlonekZespolu c1 = new CzlonekZespolu("Beata", "Nowak", "1992-10-22", "92102201347", Plcie.K, "projektant");
+            Console.WriteLine(c1);
+            CzlonekZespolu c2 = new CzlonekZespolu("Jan", "Janowski", "1992-03-15", "92031507772", Plcie.M, "Jankowski programista");
+            
+            
+            KierownikZespolu k1 = new KierownikZespolu("Jan", "Kowalski", "1980-09-02", "800902130928", Plcie.M, 5);
+            
+            Zespol z1 = new Zespol("Grupa ", k1);
+            z1.DodajCzlonka(c1);
+            z1.DodajCzlonka(c2);
+            
+
+            Console.WriteLine(z1);
+
+            Console.ReadKey();
+        }
+    }
+}

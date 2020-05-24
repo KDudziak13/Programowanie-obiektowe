@@ -1,0 +1,58 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication11
+{
+    class Paczka :  MagazynLIFO,IMagazynuje
+    {
+        string nazwaNadawcy;
+        int rozmiar;
+        public static int LiczbaPaczek;
+
+
+
+        public string NazwaNadawcy
+        {
+            get { return this.nazwaNadawcy; }
+            set { this.nazwaNadawcy = value; }
+        }
+        public int Rozmiar
+        {
+            get { return this.rozmiar; }
+            set { this.rozmiar = value; }
+        }
+
+      
+        static Paczka()
+        {
+            LiczbaPaczek = 0;
+        }
+       
+        public Paczka()
+        {
+            this.NazwaNadawcy = null;
+            this.Rozmiar = 0;
+            LiczbaPaczek++;
+        }
+        
+        public Paczka(string n, int r)
+        {
+            this.NazwaNadawcy = n;
+            this.Rozmiar = r;
+            LiczbaPaczek++;
+        }
+        
+        public override string ToString()
+        {
+            return ("Nazwa nadawcty: " + NazwaNadawcy + "\nRozmiar: " + Rozmiar);
+        }
+       
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
+    }
+}

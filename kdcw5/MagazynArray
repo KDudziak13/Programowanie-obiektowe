@@ -1,0 +1,96 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication11
+{
+    class MagazynArray : IMagazynuje
+    {
+        public int Ilosc { get; set; }
+        string nazwaMagazynu { get; set; }
+        public ArrayList Magazyn;
+
+        public MagazynArray()
+        {
+            nazwaMagazynu = null;
+            Ilosc = 0;
+            Magazyn = new ArrayList();
+        }
+
+        public MagazynArray(string nm)
+        {
+            this.nazwaMagazynu = nm;
+            Ilosc = 0;
+            Magazyn = new ArrayList();
+        }
+
+        public void Umiesc(Paczka t)
+        {
+            this.Ilosc++;
+            this.Magazyn.Insert(0, t);
+           
+        }
+
+        public void UmiescNaPoczatku(Paczka t)
+        {
+            this.Ilosc++;
+            this.Magazyn.Add(t);
+
+        }
+
+        public Paczka Pobierz()
+        {
+            this.Ilosc--;
+            Paczka t = (Paczka)Magazyn[0]; 
+            Magazyn.Remove(t); 
+            return t;
+        }
+
+        public void Wyczysc()
+        {
+            this.Ilosc = 0;
+            this.Magazyn.Clear();
+            
+        }
+
+        public int PodajIlosc()
+        {
+            return this.Magazyn.Capacity;
+            
+        }
+
+        public Paczka PodajBiezacy()
+        {
+            Paczka t = (Paczka)this.Magazyn[0];
+            return t;
+           
+        }
+
+        //to string
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Magazyn tablica " + nazwaMagazynu + " zawiera " + Ilosc + " towarow");
+            
+            foreach (Paczka t in Magazyn)
+            {
+                sb.Append(t + "\n");
+            }
+            return sb.ToString();
+        }
+
+        
+
+        
+        public void Sortuj()
+        {
+            var t = Comparer<Paczka>.Create((t1, t2) => t1.Rozmiar.CompareTo(t2.Rozmiar));
+            this.Magazyn.Sort(t);
+        }
+
+
+    }
+}

@@ -1,0 +1,91 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication11
+{
+    class MagazynList : IMagazynuje
+    {
+        LinkedList<Paczka> Magazyn;
+        public int Ilosc { get; set; }
+        public string nazwaMagazynu { get; set; }
+
+        public MagazynList()
+        {
+            nazwaMagazynu = null;
+            Ilosc = 0;
+            Magazyn = new LinkedList<Paczka>();
+        }
+
+        public MagazynList(string nm)
+        {
+            this.nazwaMagazynu = nm;
+            Ilosc = 0;
+            Magazyn = new LinkedList<Paczka>();
+        }
+        //metody interfejsu
+        public void Umiesc(Paczka t)
+        {
+            this.Ilosc++;
+            this.Magazyn.AddLast(t);
+            
+        }
+
+        public void UmiescNaPoczatku(Paczka t)
+        {
+            this.Ilosc++;
+            this.Magazyn.AddFirst(t);
+          
+        }
+
+        public Paczka Pobierz()
+        {
+            this.Ilosc--;
+            Paczka t = Magazyn.First();
+           
+            this.Magazyn.RemoveFirst();
+            return t;
+        }
+
+        public void Wyczysc()
+        {
+            this.Ilosc = 0;
+            this.Magazyn.Clear();
+
+            //usuwa wszystko z listy
+        }
+
+        public int PodajIlosc()
+        {
+            return this.Magazyn.Count();
+        }
+
+        public Paczka PodajBiezacy()
+        {
+            return this.Magazyn.First();
+            //zwraca pierwszy element
+        }
+        //tostring
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Magazyn Lista " + nazwaMagazynu + ": " + Ilosc + " paczek");
+
+           
+            foreach (Paczka t in Magazyn)
+            {
+                sb.Append(t + "\n");
+            }
+            return sb.ToString();
+        }
+
+        //sortowanie
+        public void Sortuj()
+        {
+            this.Magazyn = new LinkedList<Paczka>(Magazyn.OrderBy((t) => { return t.Rozmiar; }));
+        }
+       
+    }
+}

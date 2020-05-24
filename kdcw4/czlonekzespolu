@@ -1,0 +1,44 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp8
+{
+    class CzlonekZespolu : Osoba
+    {
+        private string funkcja;
+
+        public string Funkcja { get => funkcja; set => funkcja = value; }
+
+        public CzlonekZespolu() : base()
+        {
+
+            funkcja = null;
+
+        }
+
+        public CzlonekZespolu(string i, string n, string d, string pesel, Plcie p, string f)
+            : base(i, n, d, pesel, p)
+        {
+
+            this.funkcja = f;
+        }//sposob magdy
+        public override string ToString()
+        {
+            //if (CheckPESEL(Pesel) == false)
+            // return "Wrong PESEL";
+            //else
+            return base.ToString() + " " + funkcja;
+        }//drugi sposob karola
+         /* public override string ToString()
+          {
+              return $"{ base.ToString()} {funkcja}";
+          }
+          */
+
+
+
+    }
+}
